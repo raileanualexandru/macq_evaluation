@@ -1,3 +1,4 @@
+/*
 package controllers
 
 import javax.inject._
@@ -29,3 +30,4 @@ class FrontendController @Inject()(
     if (resource.contains(".")) assets.at(resource) else index
   }
 }
+*/
