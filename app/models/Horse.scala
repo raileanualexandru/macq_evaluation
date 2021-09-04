@@ -1,6 +1,6 @@
 package models
 
-import org.joda.time.DateTime
+//import org.joda.time.DateTime
 import play.api.libs.json.{Format, Json}
 import reactivemongo.play.json._
 import reactivemongo.bson.BSONObjectID
@@ -10,10 +10,11 @@ import play.api.libs.json.JodaReads._
 
 case class Horse(
                   _id:Option[BSONObjectID],
-                  _creationDate: Option[DateTime],
-                  _updateDate: Option[DateTime],
-                  title:String,
-                  description:String
+                  name: String,
+                  colour: String,
+                  speed: String,
+                  breed: String,
+                  image_src: String
                 )
 object Horse{
   implicit val fmt : Format[Horse] = Json.format[Horse]
@@ -21,10 +22,11 @@ object Horse{
     def read(doc: BSONDocument): Horse = {
       Horse(
         doc.getAs[BSONObjectID]("_id"),
-        doc.getAs[BSONDateTime]("_creationDate").map(dt => new DateTime(dt.value)),
-        doc.getAs[BSONDateTime]("_updateDate").map(dt => new DateTime(dt.value)),
-        doc.getAs[String]("title").get,
-        doc.getAs[String]("description").get)
+        doc.getAs[String]("name").get,
+        doc.getAs[String]("colour").get,
+        doc.getAs[String]("speed").get,
+        doc.getAs[String]("breed").get,
+        doc.getAs[String]("image_src").get)
     }
   }
 
@@ -32,10 +34,11 @@ object Horse{
     def write(horse: Horse): BSONDocument = {
       BSONDocument(
         "_id" -> horse._id,
-        "_creationDate" -> horse._creationDate.map(date => BSONDateTime(date.getMillis)),
-        "_updateDate" -> horse._updateDate.map(date => BSONDateTime(date.getMillis)),
-        "title" -> horse.title,
-        "description" -> horse.description
+        "name" -> horse.name,
+        "colour" -> horse.colour,
+        "speed" -> horse.speed,
+        "breed" -> horse.breed,
+        "image_src" -> horse.image_src
 
       )
     }

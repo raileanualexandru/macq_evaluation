@@ -33,15 +33,15 @@ class HorseRepository @Inject()(
 
   def create(horse: Horse): Future[WriteResult] = {
     collection.flatMap(_.insert(ordered = false)
-      .one(horse.copy(_creationDate = Some(new DateTime()), _updateDate = Some(new DateTime()))))
+        .one(horse.copy()))
   }
 
   def update(id: BSONObjectID, horse: Horse):Future[WriteResult] = {
 
     collection.flatMap(
       _.update(ordered = false).one(BSONDocument("_id" -> id),
-        horse.copy(
-          _updateDate = Some(new DateTime())))
+        horse.copy())
+
     )
   }
 
