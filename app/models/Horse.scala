@@ -1,6 +1,5 @@
 package models
 
-//import org.joda.time.DateTime
 import play.api.libs.json.{Format, Json}
 import reactivemongo.play.json._
 import reactivemongo.bson.BSONObjectID
@@ -12,7 +11,7 @@ case class Horse(
                   _id:Option[BSONObjectID],
                   name: String,
                   colour: String,
-                  speed: String,
+                  speed: Int,
                   breed: String,
                   image_src: String
                 )
@@ -24,7 +23,7 @@ object Horse{
         doc.getAs[BSONObjectID]("_id"),
         doc.getAs[String]("name").get,
         doc.getAs[String]("colour").get,
-        doc.getAs[String]("speed").get,
+        doc.getAs[Int]("speed").get,
         doc.getAs[String]("breed").get,
         doc.getAs[String]("image_src").get)
     }
