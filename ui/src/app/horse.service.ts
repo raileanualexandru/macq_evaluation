@@ -24,6 +24,7 @@ export class HorseService {
     return this.http.put<Horse[]>(`${this.apiServerUrl}/horses/${horseId}`, horse);
   }
 
+
   public deleteHorse(horseId: String): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/horses/${horseId}`);
   }

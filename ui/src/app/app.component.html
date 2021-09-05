@@ -19,15 +19,71 @@
     </td>
     <td>
 
-      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal" data-target="#editHorse"
-        data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+      <!-- Edit Horse Modal start ***********************************************************************************************-->
+      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal"
+        attr.data-target="#edit{{horse._id.$oid}}" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
 
-      <!-- Delete Horse Modal start-->
+      <div>
+        <div class="modal fade" id="edit{{horse._id.$oid}}" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Horse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form #editForm="ngForm">
+                  <div class="form-group">
+                    <label for="name">Horse’s name</label>
+                    <input type="text" name="name" class="form-control" id="name" ngModel="{{horse?.name}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Colour</label>
+                    <input type="text" name="colour" class="form-control" id="colour" ngModel="{{horse?.colour}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Speed</label>
+                    <input type="number" name="speed" class="form-control" id="speed" ngModel="{{horse?.speed}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Breed</label>
+                    <input type="text" name="breed" class="form-control" id="breed" ngModel="{{horse?.breed}}">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="name">Image URL </label>
+                    <input type="text" name="image_src" class="form-control" id="image_src"
+                      ngModel="{{horse?.image_src}}">
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" id="edit-horse-form" class="btn btn-secondary"
+                      data-dismiss="modal">Close</button>
+                    <button (click)="onUpdateHorse(horse?._id.$oid, editForm.value)" data-dismiss="modal" type="submit"
+                      class="btn btn-primary">Save</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Edit Horse Modal ends **************************************************************************************************-->
+
+      <!-- Delete Horse Modal start ***********************************************************************************************-->
       <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal"
-        attr.data-target="#modal{{horse._id.$oid}}" data-placement="top" title="Delete"><i
+        attr.data-target="#delete{{horse._id.$oid}}" data-placement="top" title="Delete"><i
           class="fa fa-trash"></i></button>
 
-      <div class="modal fade" id="modal{{horse._id.$oid}}" tabindex="-1" role="dialog"
+      <div class="modal fade" id="delete{{horse._id.$oid}}" tabindex="-1" role="dialog"
         aria-labelledby="deleteModelLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -48,11 +104,12 @@
           </div>
         </div>
       </div>
-      <!--Delte Horse Modal ends-->
+      <!--Delte Horse Modal ends***********************************************************************************************-->
     </td>
   </tr>
-
 </table>
+
+
 
 
 <!-- add horse button -->
@@ -113,11 +170,3 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- Edit Horse Modal -->
-
-
-
-<!--(click)="--onDeleteHorse(deleteHorse._id.$oid)"-->

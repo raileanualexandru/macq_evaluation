@@ -15,9 +15,7 @@ import { HorseService } from './horse.service';
 export class AppComponent implements OnInit{
 
   public horses!: Horse[];
-  public deleteHorse!: Horse;
   
-
   constructor(private horseService: HorseService){}
 
   ngOnInit(){
@@ -65,33 +63,18 @@ public onDeleteHorse(horseId: String): void{
   )
 }
 
-//modal open method start
-  /*
-public onOpenModal(horse: Horse, mode: string): void {
-  const container = document.getElementById('main-container');
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.style.display = 'none';
-  button.setAttribute('data-toggle', 'modal');
-  if (mode === 'add') {
-    button.setAttribute('data-target', '#addHorseModal');
-  }
-
-  if (mode === 'edit') {
-    this.editEmployee = employee;
-    button.setAttribute('data-target', '#updateEmployeeModal');
-  }
-  
-  if (mode === 'delete') {
-    this.deleteHorse = horse;
-    button.setAttribute('data-target', '#deleteHorseModal');
-  }
-  container.appendChild(button);
-  button.click();
+public onUpdateHorse(horseId: String ,horse: Horse): void {
+  this.horseService.updateHorse(horseId, horse).subscribe(
+    (response: any) => {
+      console.log(response);
+      //window.location.reload();
+      this.getAllHorses();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+  );
 }
-
-*/
-//modal open method ends
 
 
 }
