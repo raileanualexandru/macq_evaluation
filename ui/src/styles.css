@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin-left: 100px;
+    background-color: rgb(228, 228, 228);
+}
+
+table, th, td {
+    border:1px solid rgb(17, 122, 122);
+  }
+
+  table{
+      width: 60%;
+  }
+
+th{
+    color:blue;
+    font-size: larger;
+    font-weight: bolder;
+}
+td{
+    color: rgb(88, 74, 69);
+    font-size: large;
+}
+
+.btn{
+    margin: 1rem 1rem;
+}
+
+#tdimg, .title{
+    display: flex;
+    justify-content: center;
+}
