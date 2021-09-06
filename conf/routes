@@ -19,3 +19,6 @@ GET     /horses/:id            controllers.HorseController.findOne(id: String)
 POST    /horses                controllers.HorseController.create()
 PUT     /horses/:id            controllers.HorseController.update(id: String)
 DELETE  /horses/:id            controllers.HorseController.delete(id: String)
+
+# User routes
+POST    /register               controllers.UserController.create()

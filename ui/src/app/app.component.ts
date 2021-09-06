@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Horse } from './horse';
 import { HorseService } from './horse.service';
+import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -15,19 +17,31 @@ import { HorseService } from './horse.service';
 export class AppComponent implements OnInit{
 
   public horses!: Horse[];
+  public user!: User;
   
-  constructor(private horseService: HorseService){}
+  constructor(private horseService: HorseService, private userService:UserService){}
 
   ngOnInit(){
     this.getAllHorses();
   }
 
-
+  public onAddUser(addForm: NgForm): void{
+    document.getElementById("add-user-form")?.click();
+    this.userService.addUser(addForm.value).subscribe(
+    (response: User[])=>{
+      console.log(response);
+    },
+    (error:HttpErrorResponse) =>{
+      alert(error.message)
+    }
+    )
+  }
+  
   public getAllHorses(): void{
     this.horseService.getAllHorses().subscribe(
       (response: Horse[]) =>{
         this.horses = response;
-        console.log(response[0]._id.$oid); //test
+        //console.log(response[0]._id.$oid); //test
       },
     (error: HttpErrorResponse)=>{
       alert(error.message)

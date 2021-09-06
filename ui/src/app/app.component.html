@@ -1,126 +1,56 @@
-<h1>The list of horses</h1>
+<!-- NAVBAR STARTS -->
+<nav class="navbar navbar-expand-lg bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="" alt="" class="logo_nav"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end p-3" id="navbarSupportedContent">
+      <button type="button" class="btn-md btn btn-danger mx-1">Log In</button>
+      <button type="button" class="btn-md btn btn-danger mx-1" data-toggle="modal" data-target="#addUser">Sign Up</button>
+    </div>
+  </div>
+</nav>
+<!-- NAVBAR ENDS -->
 
-<table>
-  <tr>
-    <th>Horse’s name</th>
-    <th>Colour</th>
-    <th>Speed</th>
-    <th>Breed</th>
-    <th>Image</th>
-    <th>Options</th>
-  </tr>
-  <tr *ngFor="let horse of horses">
-    <td>{{horse?.name}}</td>
-    <td>{{horse?.colour}}</td>
-    <td>{{horse?.speed}}</td>
-    <td>{{horse?.breed}}</td>
-    <td id="tdimg">
-      <img src="{{horse?.image_src}}" width="230" height="150">
-    </td>
-    <td>
-
-      <!-- Edit Horse Modal start ***********************************************************************************************-->
-      <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal"
-        attr.data-target="#edit{{horse._id.$oid}}" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
-
-      <div>
-        <div class="modal fade" id="edit{{horse._id.$oid}}" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Horse</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+<!--login form start-->
+<section class="bg-form2" hidden>
+  <div class="container">
+    <div class="form text-white">
+      <div class="row border m-0 d-flex flex-column align-items-center line">
+        <div class="col-md-6 offset-md-3 m-0 bg-dark">
+          <div class="form">
+            <h1 class="text-left text-white">Log in</h1><br>
+            <form>
+              <div class="form-group ">
+                <label for="exampleInputEmail">Email</label>
+                <input type="text" name="email" class="form-control">
               </div>
-              <div class="modal-body">
-                <form #editForm="ngForm">
-                  <div class="form-group">
-                    <label for="name">Horse’s name</label>
-                    <input type="text" name="name" class="form-control" id="name" ngModel="{{horse?.name}}">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="name">Colour</label>
-                    <input type="text" name="colour" class="form-control" id="colour" ngModel="{{horse?.colour}}">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="name">Speed</label>
-                    <input type="number" name="speed" class="form-control" id="speed" ngModel="{{horse?.speed}}">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="name">Breed</label>
-                    <input type="text" name="breed" class="form-control" id="breed" ngModel="{{horse?.breed}}">
-                  </div>
-
-
-                  <div class="form-group">
-                    <label for="name">Image URL </label>
-                    <input type="text" name="image_src" class="form-control" id="image_src"
-                      ngModel="{{horse?.image_src}}">
-                  </div>
-
-                  <div class="modal-footer">
-                    <button type="button" id="edit-horse-form" class="btn btn-secondary"
-                      data-dismiss="modal">Close</button>
-                    <button (click)="onUpdateHorse(horse?._id.$oid, editForm.value)" data-dismiss="modal" type="submit"
-                      class="btn btn-primary">Save</button>
-                  </div>
-
-                </form>
+              <div class="form-group ">
+                <label for="exampleInputPassword1 ">Password</label>
+                <input type="password" name="pwd" class="form-control">
               </div>
-            </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label text-secondary" for="exampleCheck1">Save password</label>
+                <br>
+              </div>
+              <div class="d-grid gap-2 col-6 mx-auto p-3">
+                <button class="btn btn-outline-danger logBtn" type="button">Log In</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <!-- Edit Horse Modal ends **************************************************************************************************-->
+    </div>
+  </div>
+</section><br> <br>
+<!--login form ends-->
 
-      <!-- Delete Horse Modal start ***********************************************************************************************-->
-      <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal"
-        attr.data-target="#delete{{horse._id.$oid}}" data-placement="top" title="Delete"><i
-          class="fa fa-trash"></i></button>
-
-      <div class="modal fade" id="delete{{horse._id.$oid}}" tabindex="-1" role="dialog"
-        aria-labelledby="deleteModelLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="deleteModelLabel">Delete Horse</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete horse {{horse?.name}}?</p>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button (click)="--onDeleteHorse(horse._id.$oid)" class="btn btn-danger"
-                  data-dismiss="modal">Yes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--Delte Horse Modal ends***********************************************************************************************-->
-    </td>
-  </tr>
-</table>
-
-
-
-
-<!-- add horse button -->
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHorse">
-  Add Horse
-</button>
-
-<!-- add horse Modal -->
+<!--sign up form start-->
 <div>
-  <div class="modal fade" id="addHorse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -131,42 +61,208 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #addForm="ngForm" (ngSubmit)="onAddHorse(addForm)">
+          <form #addUserForm="ngForm" (ngSubmit)="onAddUser(addUserForm)">
             <div class="form-group">
-              <label for="name">Horse’s name</label>
-              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+              <label for="exampleInputUsername">Full Name</label>
+              <input type="text" ngModel name="name" class="form-control">
             </div>
-
-            <div class="form-group">
-              <label for="name">Colour</label>
-              <input type="text" ngModel name="colour" class="form-control" id="colour" placeholder="Colour" required>
+            <div class="form-group ">
+              <label for="exampleInputEmail">Email</label>
+              <input type="text" ngModel name="email" class="form-control">
             </div>
-
-            <div class="form-group">
-              <label for="name">Speed</label>
-              <input type="number" ngModel name="speed" class="form-control" id="speed" placeholder="Speed" required>
+            <div class="form-group ">
+              <label for="exampleInputEmail">User name</label>
+              <input type="text" ngModel name="username" class="form-control">
             </div>
-
-            <div class="form-group">
-              <label for="name">Breed</label>
-              <input type="text" ngModel name="breed" class="form-control" id="breed" placeholder="Breed" required>
+            <div class="form-group ">
+              <label for="exampleInputPassword1 ">Password</label>
+              <input type="password" ngModel name="pwd" class="form-control">
             </div>
-
-
-            <div class="form-group">
-              <label for="name">Image URL </label>
-              <input type="text" ngModel name="image_src" class="form-control" id="image_src" placeholder="Image URL"
-                required>
-            </div>
-
             <div class="modal-footer">
-              <button type="button" id="add-horse-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save</button>
+              <button type="button" id="add-user-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addUserForm.invalid" type="submit" class="btn btn-primary">Save</button>
             </div>
-
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!--sign up form ends-->
+
+<section id="main">
+  <h1>The list of horses</h1>
+
+  <table>
+    <tr>
+      <th>Horse’s name</th>
+      <th>Colour</th>
+      <th>Speed</th>
+      <th>Breed</th>
+      <th>Image</th>
+      <th>Options</th>
+    </tr>
+    <tr *ngFor="let horse of horses">
+      <td>{{horse?.name}}</td>
+      <td>{{horse?.colour}}</td>
+      <td>{{horse?.speed}}</td>
+      <td>{{horse?.breed}}</td>
+      <td id="tdimg">
+        <img src="{{horse?.image_src}}" width="230" height="150">
+      </td>
+      <td>
+
+        <!-- Edit Horse Modal start ***********************************************************************************************-->
+        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="modal"
+          attr.data-target="#edit{{horse._id.$oid}}" data-placement="top" title="Edit"><i
+            class="fa fa-edit"></i></button>
+
+        <div>
+          <div class="modal fade" id="edit{{horse._id.$oid}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Horse</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #editForm="ngForm">
+                    <div class="form-group">
+                      <label for="name">Horse’s name</label>
+                      <input type="text" name="name" class="form-control" id="name" ngModel="{{horse?.name}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Colour</label>
+                      <input type="text" name="colour" class="form-control" id="colour" ngModel="{{horse?.colour}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Speed</label>
+                      <input type="number" name="speed" class="form-control" id="speed" ngModel="{{horse?.speed}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name">Breed</label>
+                      <input type="text" name="breed" class="form-control" id="breed" ngModel="{{horse?.breed}}">
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="name">Image URL </label>
+                      <input type="text" name="image_src" class="form-control" id="image_src"
+                        ngModel="{{horse?.image_src}}">
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" id="edit-horse-form" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                      <button (click)="onUpdateHorse(horse?._id.$oid, editForm.value)" data-dismiss="modal"
+                        type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Edit Horse Modal ends **************************************************************************************************-->
+
+        <!-- Delete Horse Modal start ***********************************************************************************************-->
+        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="modal"
+          attr.data-target="#delete{{horse._id.$oid}}" data-placement="top" title="Delete"><i
+            class="fa fa-trash"></i></button>
+
+        <div class="modal fade" id="delete{{horse._id.$oid}}" tabindex="-1" role="dialog"
+          aria-labelledby="deleteModelLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Delete Horse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete horse {{horse?.name}}?</p>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button (click)="--onDeleteHorse(horse._id.$oid)" class="btn btn-danger"
+                    data-dismiss="modal">Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Delte Horse Modal ends***********************************************************************************************-->
+      </td>
+    </tr>
+  </table>
+
+
+
+
+  <!-- add horse button -->
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHorse">
+    Add Horse
+  </button>
+
+  <!-- add horse Modal -->
+  <div>
+    <div class="modal fade" id="addHorse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Horse</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddHorse(addForm)">
+              <div class="form-group">
+                <label for="name">Horse’s name</label>
+                <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="name">Colour</label>
+                <input type="text" ngModel name="colour" class="form-control" id="colour" placeholder="Colour" required>
+              </div>
+
+              <div class="form-group">
+                <label for="name">Speed</label>
+                <input type="number" ngModel name="speed" class="form-control" id="speed" placeholder="Speed" required>
+              </div>
+
+              <div class="form-group">
+                <label for="name">Breed</label>
+                <input type="text" ngModel name="breed" class="form-control" id="breed" placeholder="Breed" required>
+              </div>
+
+
+              <div class="form-group">
+                <label for="name">Image URL </label>
+                <input type="text" ngModel name="image_src" class="form-control" id="image_src" placeholder="Image URL"
+                  required>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" id="add-horse-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

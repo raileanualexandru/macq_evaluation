@@ -8,15 +8,15 @@ import play.api.libs.json.JodaWrites._
 import play.api.libs.json.JodaReads._
 
 case class Horse(
-                  _id:Option[BSONObjectID],
-                  name: String,
-                  colour: String,
-                  speed: Int,
-                  breed: String,
-                  image_src: String
-                )
-object Horse{
-  implicit val fmt : Format[Horse] = Json.format[Horse]
+    _id: Option[BSONObjectID],
+    name: String,
+    colour: String,
+    speed: Int,
+    breed: String,
+    image_src: String
+)
+object Horse {
+  implicit val fmt: Format[Horse] = Json.format[Horse]
   implicit object HorseBSONReader extends BSONDocumentReader[Horse] {
     def read(doc: BSONDocument): Horse = {
       Horse(
@@ -25,7 +25,8 @@ object Horse{
         doc.getAs[String]("colour").get,
         doc.getAs[Int]("speed").get,
         doc.getAs[String]("breed").get,
-        doc.getAs[String]("image_src").get)
+        doc.getAs[String]("image_src").get
+      )
     }
   }
 
@@ -38,7 +39,6 @@ object Horse{
         "speed" -> horse.speed,
         "breed" -> horse.breed,
         "image_src" -> horse.image_src
-
       )
     }
   }

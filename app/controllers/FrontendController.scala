@@ -8,12 +8,12 @@ import play.api.http.HttpErrorHandler
 import play.api.mvc._
 
 /**
-  * Frontend controller managing all static resource associate routes.
-  * @param assets Assets controller reference.
-  * @param errorHandler HttpErrorHandler
-  * @param config Configuration
-  * @param cc Controller components reference.
-  */
+ * Frontend controller managing all static resource associate routes.
+ * @param assets Assets controller reference.
+ * @param errorHandler HttpErrorHandler
+ * @param config Configuration
+ * @param cc Controller components reference.
+ */
 @Singleton
 class FrontendController @Inject()(
     assets: Assets,
@@ -30,4 +30,4 @@ class FrontendController @Inject()(
     if (resource.contains(".")) assets.at(resource) else index
   }
 }
-*/
+ */
