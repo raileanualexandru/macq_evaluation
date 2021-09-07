@@ -18,6 +18,7 @@ class UserController @Inject() (implicit
     val controllerComponents: ControllerComponents
 ) extends BaseController {
 
+
   def create(): Action[JsValue] =
     Action.async(controllerComponents.parsers.json) { implicit request =>
       {
@@ -33,5 +34,7 @@ class UserController @Inject() (implicit
           )
       }
     }
+   
 
 }
+

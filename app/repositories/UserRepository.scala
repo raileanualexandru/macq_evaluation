@@ -18,11 +18,13 @@ class UserRepository @Inject() (implicit
   def collection: Future[BSONCollection] =
     reactiveMongoApi.database.map(db => db.collection("users"))
 
+  
   def create(user: User): Future[WriteResult] = {
     collection.flatMap(
       _.insert(ordered = false)
         .one(user.copy())
     )
   }
+
 
 }
