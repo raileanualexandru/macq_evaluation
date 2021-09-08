@@ -15,6 +15,7 @@ case class Horse(
     breed: String,
     image_src: String
 )
+
 object Horse {
   implicit val fmt: Format[Horse] = Json.format[Horse]
   implicit object HorseBSONReader extends BSONDocumentReader[Horse] {

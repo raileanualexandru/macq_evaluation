@@ -9,6 +9,7 @@ import reactivemongo.api.{Cursor, ReadPreference}
 import reactivemongo.bson.{BSONDocument, BSONObjectID}
 import org.joda.time.DateTime
 import reactivemongo.api.commands.WriteResult
+import scalapasswordhash.PasswordHash
 
 @Singleton
 class UserRepository @Inject() (implicit
@@ -22,7 +23,7 @@ class UserRepository @Inject() (implicit
   def create(user: User): Future[WriteResult] = {
     collection.flatMap(
       _.insert(ordered = false)
-        .one(user.copy())
+              .one(user.copy(pwd = PasswordHash.createHash(user.pwd)))
     )
   }
 
